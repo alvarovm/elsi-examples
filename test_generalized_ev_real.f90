@@ -155,7 +155,7 @@ program test_generalized_ev_real
    !
    ! Solve half spectrum
    !
-   n_states = matrix_size/2
+   n_states = matrix_size
    if(myid==0) print *,'Matrix size: ',na
    if(myid==0) print *,'N_states size: ',n_states
 
@@ -300,10 +300,8 @@ subroutine read_matrix(iunit, na, a, lda, nblk, my_prow, my_pcol, np_rows, np_co
 
    read(iunit,*, iostat=i_code) ii, jj, dtmp
    do i=1,na
-      !if(myid==0)    read(iunit) col(1:i)
       col(1:i)=0.0
       if(myid==0)  then
-      !   col(1:i)=0.0
           do while (i.eq.ii)
             col(jj)=dtmp
             read(iunit,*, iostat=i_code) ii, jj, dtmp
