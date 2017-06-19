@@ -307,7 +307,6 @@ subroutine read_matrix(iunit, na, a, lda, nblk, my_prow, my_pcol, np_rows, np_co
           do while (i.eq.ii)
             col(jj)=dtmp
             read(iunit,*, iostat=i_code) ii, jj, dtmp
-            print * , ' hola', dtmp
             if(i_code<0) goto 100
             if(i_code>0) stop ' error' 
           enddo
