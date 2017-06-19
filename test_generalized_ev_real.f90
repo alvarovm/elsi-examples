@@ -298,14 +298,16 @@ subroutine read_matrix(iunit, na, a, lda, nblk, my_prow, my_pcol, np_rows, np_co
    call mpi_comm_rank(MPI_COMM_WORLD,myid,mpierr)
    allocate(col(na))
 
-   read(10,*, iostat=i_code) ii, jj, dtmp
+   read(iunit,*, iostat=i_code) ii, jj, dtmp
    do i=1,na
       !if(myid==0)    read(iunit) col(1:i)
+      col(1:i)=0.0
       if(myid==0)  then
-       col(1:i)=0.0
+      !   col(1:i)=0.0
           do while (i.eq.ii)
             col(jj)=dtmp
-            read(10,*, iostat=i_code) ii, jj, dtmp
+            read(iunit,*, iostat=i_code) ii, jj, dtmp
+            print * , ' hola', dtmp
             if(i_code<0) goto 100
             if(i_code>0) stop ' error' 
           enddo
