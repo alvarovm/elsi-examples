@@ -216,10 +216,10 @@ program test_generalized_ev_real
 
    ! Customize ELSI
    call elsi_customize(elsi_h,print_detail=.true.)
-   !call elsi_customize(elsi_h,uplo=2)
-   !call elsi_customize(elsi_h,singularity_tolerance=0.1)
+   !!call elsi_customize(elsi_h,uplo=2)
+   !call elsi_customize(elsi_h,singularity_tolerance=1.0_r8)
    !call elsi_customize(elsi_h,no_singularity_check=.true.)
-   !call elsi_customize(elsi_h,overlap_is_unit=.true.)
+   !!call elsi_customize(elsi_h,overlap_is_unit=.true.)
    
    t1 = MPI_Wtime()
 
@@ -237,9 +237,11 @@ program test_generalized_ev_real
    call elsi_finalize(elsi_h)
 
   if(myid == 0) then
-      do i=1, n_states
-      print  * , "e=" ,  i  , e_val(i)
-      enddo
+      if( n_states .lt. 1025) then
+        do i=1, n_states
+         print  * , "e=" ,  i  , e_val(i)
+        enddo
+      endif
   endif
    deallocate(e_val)
    deallocate(e_vec)
