@@ -155,7 +155,8 @@ program test_generalized_ev_real
    !
    ! Solve half spectrum
    !
-   n_states = matrix_size
+   n_states = matrix_size/2
+   !n_states = 10
    if(myid==0) print *,'Matrix size: ',na
    if(myid==0) print *,'N_states size: ',n_states
 
